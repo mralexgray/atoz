@@ -1,0 +1,41 @@
+{
+  "name": "atoz",
+  "version": "1.0.0",
+  "description": "the basics",
+  "main": "lib/atoz.js",
+  "bin": "",
+  "scripts": {
+    "env": "env | sort",
+    "watch": "coffee -bwo lib src",
+    "build": "coffee -bo lib src",
+    "clean": "rm -f lib/*",
+		"pretest" : "npm run build",
+    "test": "coffee test/*.litcoffee",
+    "prepublish": "npm run build",
+    "prelink": "npm run build",
+    "docs": "docco -l classis src/*.litcoffee",
+    "readme": "coffee -e $npm_package_tester"
+  },
+  "tester": "console.log 'hello'",
+  "readmescript": "fs = require 'fs'; source = fs.readFileSync('journo.litcoffee').toString(); source = source.replace /\\n\\n    ([\\s\\S]*?)\\n\\n(?!    )/mg, (match, code) ->;    \"\\n```coffeescript\\n#{code.replace(/^    /mg, '')}\\n```\\n\"; fs.writeFileSync 'README.md', source",
+  "author": "Alex Gray <alex@mrgray.com> (https://github.com/mralexgray)",
+  "license": "ISC",
+  "dependencies": {
+    "expand-home-dir": "0.0.2",
+    "glasses": "0.0.1",
+    "inquirer": "^0.10.1",
+    "npm-stats": "^1.1.0",
+    "rsyncwrapper": "^0.4.3",
+    "simple-ssh": "^0.8.6",
+    "supports-color": "^3.1.2",
+    "underscore": "^1.8.3"
+  },
+  "files": [
+    "src/atoz.js"
+  ],
+  "devDependencies": {
+    "ava": "^0.2.0",
+    "coffee-script": "*",
+    "nodeunit": "^0.9.1"
+  }
+}

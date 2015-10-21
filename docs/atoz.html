@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>atoz.litcoffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>atoz.litcoffee</h1>
+        
+
+        
+      </div>
+
+      
+        
+        <h3 id="atoz-node-module">atoz node module</h3>
+
+        
+          <div class='highlight'><pre>expand = <span class="hljs-built_in">require</span> <span class="hljs-string">'expand-home-dir'</span>
+stats = <span class="hljs-built_in">require</span> <span class="hljs-string">'npm-stats'</span>
+C = <span class="hljs-built_in">require</span> <span class="hljs-string">'configstore'</span>
+
+`<span class="javascript">
+ inquirer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'inquirer'</span>),
+			 __ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>),
+			clc = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cli-color'</span>),
+	 config = <span class="hljs-keyword">new</span> C(),
+	glasses = <span class="hljs-built_in">require</span>(<span class="hljs-string">'glasses'</span>),
+			 fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>),
+		 util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>),
+			SSH = <span class="hljs-built_in">require</span>(<span class="hljs-string">'simple-ssh'</span>)
+</span>`
+<span class="hljs-function"><span class="hljs-title">extend</span> = <span class="hljs-params">(obj, mixin)</span> -&gt;</span>
+  obj[name] = method <span class="hljs-keyword">for</span> name, method <span class="hljs-keyword">of</span> mixin        
+  obj
+<span class="hljs-function">
+<span class="hljs-title">include</span> = <span class="hljs-params">(klass, mixin)</span> -&gt;</span>
+  extend klass.prototype, mixin</pre></div>
+        
+      
+        
+        <h2 id="usage-https-arcturo-github-io-library-coffeescript-03_classes-html">Usage  <a href="https://arcturo.github.io/library/coffeescript/03_classes.html">https://arcturo.github.io/library/coffeescript/03_classes.html</a></h2>
+
+        
+          <div class='highlight'><pre>include Parrot,
+  <span class="hljs-attribute">isDeceased</span>: <span class="hljs-literal">true</span>
+(<span class="hljs-keyword">new</span> Parrot).isDeceased</pre></div>
+        
+      
+        
+        <p>##</p>
+
+        
+          <div class='highlight'><pre>
+Function :: args -&gt;
+	Array.prototype.slice.call arguments
+
+Object :: <span class="hljs-built_in">print</span> = <span class="hljs-function"><span class="hljs-params">(color)</span> -&gt;</span>
+  <span class="hljs-built_in">console</span>.log <span class="hljs-keyword">if</span> color <span class="hljs-keyword">and</span> clc.supportsColor <span class="hljs-keyword">then</span> clc[color](@) <span class="hljs-keyword">else</span> @
+
+Array :: sum = <span class="hljs-function">-&gt;</span> @.reduce (x, y) -&gt; x + y
+
+clc.supportsColor = <span class="hljs-function">-&gt;</span> <span class="hljs-built_in">require</span>(<span class="hljs-string">'supports-color'</span>)
+
+<span class="hljs-built_in">module</span>.exports =
+  <span class="hljs-attribute">ssh</span>: <span class="hljs-function"><span class="hljs-params">(host)</span> =&gt;</span>
+    <span class="hljs-keyword">new</span> SSH
+      <span class="hljs-attribute">host</span>: host
+      <span class="hljs-attribute">user</span>: <span class="hljs-string">'root'</span>
+      <span class="hljs-attribute">key</span>: fs.readFileSync( @.home <span class="hljs-string">'~/.ssh/id_rsa'</span> )
+  <span class="hljs-attribute">home</span>: <span class="hljs-function"><span class="hljs-params">(path)</span> -&gt;</span>
+    expand(path)
+  <span class="hljs-attribute">methods</span>: <span class="hljs-function"><span class="hljs-params">(obj)</span> -&gt;</span>
+    glasses.methods (obj)
+  <span class="hljs-attribute">introspect</span>: <span class="hljs-function"><span class="hljs-params">(obj)</span> -&gt;</span>
+    <span class="hljs-built_in">console</span>.log util.inspect  obj,
+      <span class="hljs-attribute">showHidden</span>: <span class="hljs-literal">yes</span>
+      <span class="hljs-attribute">depth</span>: <span class="hljs-literal">null</span>
+      <span class="hljs-attribute">colors</span>: <span class="hljs-literal">yes</span>
+  <span class="hljs-attribute">dlcount</span>: <span class="hljs-function"><span class="hljs-params">(mods, res)</span> -&gt;</span>
+    modules = Array.isArray(mods) ? mods : [mods]
+    modules.forEach (mod) -&gt;
+      stats.<span class="hljs-built_in">module</span>(mod).downloads (err, val) -&gt;
+        x = (x.value <span class="hljs-keyword">for</span> x <span class="hljs-keyword">of</span> val).sum()
+        <span class="hljs-keyword">if</span> res <span class="hljs-keyword">then</span> res x <span class="hljs-keyword">else</span> <span class="hljs-built_in">console</span>.log x</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

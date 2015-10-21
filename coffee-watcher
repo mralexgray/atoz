@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+
+# ^(?!.*\.txt).+$
+#.*[^litcoffee]'
+
+fswatch -0Er /node -e '.*' -i ".*\.litcoffee$" | while read -d "" event
+do
+	clear
+	cd $(dirname $event)
+	echo $(pwd)
+	[[ ! -f package.json ]] && cd ..
+	echo $(pwd)
+	npm run build --color=false && npm test && terminal-notify 
+		
+done
+
+
+# xargs -0 -n 1 -I {}  {}
